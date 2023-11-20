@@ -1,0 +1,29 @@
+{
+	"schemaVersion": 1,
+	"id": "rebalance",
+	"version": "${version}",
+	"name": "ReBalance",
+	"description": "Balances damage dealt by players, highly configurable",
+	"authors": [
+		"ElocinDev"
+	],
+	"contact": {
+		"homepage": "https://legacy.curseforge.com/minecraft/mc-mods/rebalance"
+	},
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"elocindev.rebalance.ReBalance"
+		]
+	},
+	"mixins": [
+		"rebalance.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.24",
+		"java": ">=17",
+		"fabric-api": "*",
+		"necronomicon": "*"
+	}
+}

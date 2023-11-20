@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "elocindev.rebalance.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"DamageMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
