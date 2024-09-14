@@ -1,4 +1,4 @@
-# ReBalance 1.1.0
+# ReBalance 1.2.0
 - Config is now rebalance.json5 (Make sure to move your config values over!)
 - Added dynamic_reduction_start config value, defines when the dynamic reduction should kick in
 - Added should_ignore_first_hit config value, defines if the first hit shouldn't be rebalanced, which is how it works in 1.0.0
