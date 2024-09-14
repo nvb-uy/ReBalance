@@ -19,6 +19,10 @@ repositories {
 	maven {
         url "https://cursemaven.com"
     }
+
+	maven {
+		url "https://api.modrinth.com/maven"
+	}
 }
 
 dependencies {
@@ -29,7 +33,7 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "curse.maven:necronomicon-586157:${project.necronomicon_id}"
+	modImplementation "maven.modrinth:necronomicon:${project.necronomicon_version}-fabric"
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 
