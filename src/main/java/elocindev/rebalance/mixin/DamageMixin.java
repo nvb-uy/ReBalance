@@ -34,14 +34,13 @@ public abstract class DamageMixin {
 
         if (attacker == null) return;
 
-        if (lastDamageTaken > 0 && ReBalance.CONFIG.enable_dynamic_rebalance) {
+        if ((lastDamageTaken > 0 || !ReBalance.CONFIG.should_ignore_first_hit) && ReBalance.CONFIG.enable_dynamic_rebalance && amount >= ReBalance.CONFIG.dynamic_reduction_start) {
             if (!(entity instanceof PlayerEntity)) {
                 World world = attacker.getWorld();
                 float maxHp = getMaxHealth();
 
                 float thresholdCheck = amount / maxHp;
                 
-
                 float ddrAttackSpeedWeight = ReBalance.CONFIG.attack_speed_weight;
                 float reductionamount = ReBalance.CONFIG.reduction_amount / 100;
                 float healththreshold = ReBalance.CONFIG.health_threshold / 100;
@@ -51,7 +50,7 @@ public abstract class DamageMixin {
 
                 if (thresholdCheck > healththreshold && maxHp >= minimumHp) {
                     float damageReduction = Math.min((healthPercent * reductionamount), (damage / 2));
-                    newAmount = Math.max((damage - damageReduction), 1) * Math.max(Math.min(damageFrequency, 1.0f), 0.3f);
+                    newAmount = ReBalance.CONFIG.dynamic_reduction_start + Math.max((damage - damageReduction), 1) * Math.max(Math.min(damageFrequency, 1.0f), 0.3f);
                     
                     if (ReBalance.CONFIG.enable_debug && attacker instanceof PlayerEntity) {
                         attacker.sendMessage(Text.literal("§fDamage reduced from §6" + damage + " §fto§a " + newAmount + " §fusing DR: §6" + damageReduction + "§f & SDR: §b" + damageFrequency));
@@ -73,6 +72,7 @@ public abstract class DamageMixin {
         if (attacker instanceof PlayerEntity) {
             if (amount > ReBalance.CONFIG.global_reduction_start && ReBalance.CONFIG.enable_global_reduction)
                 newAmount *= ReBalance.CONFIG.global_reduction_multiplier;
+                newAmount += ReBalance.CONFIG.global_reduction_start;
 
             if (ReBalance.CONFIG.enable_pvp_rebalance && entity instanceof PlayerEntity) {
                 newAmount *= ReBalance.CONFIG.pvp_damage_multiplier;

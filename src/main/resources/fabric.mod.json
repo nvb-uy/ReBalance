@@ -21,9 +21,9 @@
 		"rebalance.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.14.24",
+		"fabricloader": ">=0.15.11",
 		"java": ">=17",
 		"fabric-api": "*",
-		"necronomicon": "*"
+		"necronomicon": ">=1.4.2"
 	}
 }
