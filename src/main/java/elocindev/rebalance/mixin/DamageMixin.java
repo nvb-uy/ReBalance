@@ -50,7 +50,7 @@ public abstract class DamageMixin {
 
                 if (thresholdCheck > healththreshold && maxHp >= minimumHp) {
                     float damageReduction = Math.min((healthPercent * reductionamount), (damage / 2));
-                    newAmount = ReBalance.CONFIG.dynamic_reduction_start + Math.max((damage - damageReduction), 1) * Math.max(Math.min(damageFrequency, 1.0f), 0.3f);
+                    newAmount = Math.max((damage - damageReduction), 1) * Math.max(Math.min(damageFrequency, 1.0f), 0.3f);
                     
                     if (ReBalance.CONFIG.enable_debug && attacker instanceof PlayerEntity) {
                         attacker.sendMessage(Text.literal("§fDamage reduced from §6" + damage + " §fto§a " + newAmount + " §fusing DR: §6" + damageReduction + "§f & SDR: §b" + damageFrequency));
@@ -70,9 +70,10 @@ public abstract class DamageMixin {
         }
 
         if (attacker instanceof PlayerEntity) {
-            if (amount > ReBalance.CONFIG.global_reduction_start && ReBalance.CONFIG.enable_global_reduction)
+            if (amount > ReBalance.CONFIG.global_reduction_start && ReBalance.CONFIG.enable_global_reduction) {
                 newAmount *= ReBalance.CONFIG.global_reduction_multiplier;
                 newAmount += ReBalance.CONFIG.global_reduction_start;
+            }
 
             if (ReBalance.CONFIG.enable_pvp_rebalance && entity instanceof PlayerEntity) {
                 newAmount *= ReBalance.CONFIG.pvp_damage_multiplier;
